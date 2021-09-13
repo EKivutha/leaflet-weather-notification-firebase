@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs/internal/Observable';
 import { Weather } from './weather';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +20,14 @@ export class ShareService {
   getweatherList() { 
     return this.angularFirestore
     .collection("weather-collection")
-    .snapshotChanges();
+    .snapshotChanges().pipe(
+      map((changes) =>{
+       return changes.map((c) =>{
+          //return{ id:c.payload.doc.id, ...c.payload.doc.data() }
+        })
+      }));
   }
+
 
   createweather(weather: Weather) {
     return new Promise<any>((resolve, reject) =>{

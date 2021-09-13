@@ -11,6 +11,7 @@ import { MaterialComponent } from './material.module';
 import { environment } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire/compat/";
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
     BrowserAnimationsModule,
     MaterialComponent,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
     AngularFirestoreModule
   ],
   providers: [
