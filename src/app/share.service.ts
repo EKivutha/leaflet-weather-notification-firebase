@@ -3,58 +3,37 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs/internal/Observable';
 import { Weather } from './weather';
 import { map } from 'rxjs/operators';
+import { collection, getDocs } from "firebase/firestore";
+import { AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/compat/database';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShareService {
-  constructor(private angularFirestore: AngularFirestore) {}
-
-  getweatherDoc(id) {
-    return this.angularFirestore
-    .collection('weather-collection')
-    .doc(id)
-    .valueChanges()
-  }
-
-  getweatherList() { 
-    return this.angularFirestore
-    .collection("weather-collection")
-    .snapshotChanges().pipe(
-      map((changes) =>{
-       return changes.map((c) =>{
-          //return{ id:c.payload.doc.id, ...c.payload.doc.data() }
-        })
-      }));
-  }
-
-
-  createweather(weather: Weather) {
-    return new Promise<any>((resolve, reject) =>{
-      this.angularFirestore
-        .collection("weather-collection")
-        .add(weather)
-        .then(response => { console.log(response) }, error => reject(error));
-    });
-  }
-
-  deleteweather(weather) {
-    return this.angularFirestore
-      .collection("weather-collection")
-      .doc(weather.key)
-      .delete();
-  }
+  weather!: AngularFireList<Weather>;
+  weatherS!: Weather[];
+  constructor( firestore: AngularFireDatabase
+    ) { //this.weather = firestore.collection('/weather-collection').valueChanges();
+      this.weather = firestore.list('weather-collection');
+      }
+      getAll(): AngularFireList<Weather> {
+        return this.weather;
+      }
+      create(weatherd:Weather): any {
+        return this.weather.push(weatherd);
+      }
+    
+      retrieveWeather(): void {
+        this.getAll().snapshotChanges().pipe(
+          map(changes =>
+            changes.map(c =>
+              ({ key: c.payload.key, ...c.payload.val() })
+            )
+          )
+        ).subscribe(data => {
+          this.weatherS = data;
+          return this.weatherS;
+        });
+      }
   
-  updateweather(weather: Weather, id) {
-    return this.angularFirestore
-      .collection("weather-collection")
-      .doc(id)
-      .update({
-        temp:weather.temp,
-        country:weather.country,
-        name: weather.name,
-        weather: weather.weather,
-        date: weather.date
-      });
-  }
 }

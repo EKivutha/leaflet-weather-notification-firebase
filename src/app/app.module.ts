@@ -12,6 +12,8 @@ import { environment } from "../environments/environment";
 import { AngularFireModule } from "@angular/fire/compat/";
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { initializeApp } from "firebase/app";
+
 
 @NgModule({
   declarations: [

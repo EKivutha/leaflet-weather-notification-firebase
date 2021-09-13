@@ -13,5 +13,12 @@ export class PopupService {
       `<div>Weather: ${data.weather[0].description }</div>`+
       `<div>Date: ${date}</div>`
  }
+ makeCapitalPopupF(data: any): string{     
+  return `` +
+    `<div>Temperature: ${data.temp} F</div>` +
+    `<div>Location: ${data.country},${data.name}</div>` +
+    `<div>Weather: ${data.weather }</div>`+
+    `<div>Date: ${data.date}</div>`
+  }
 }
 
