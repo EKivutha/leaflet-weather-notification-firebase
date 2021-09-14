@@ -21,7 +21,7 @@ npm install firebase@latest
 
 The application has two components 
 1
-(./src/assets/Screenshot from 2021-09-14 06-21-08.png?raw=true)
+![](./src/assets/Screenshot from 2021-09-14 06-21-08.png?raw=true)
 2
-(./src/assets/Screenshot from 2021-09-14 06-22-42.png?raw=true)
+![](./src/assets/Screenshot from 2021-09-14 06-22-42.png?raw=true)
 And is connected to a firebase realtime database to enable saving and loading
