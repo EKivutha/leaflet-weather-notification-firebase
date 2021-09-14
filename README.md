@@ -23,5 +23,5 @@ The application has two components
 1
 ![](https://github.com/gerkibz/leaflet-weather-notification-firebase/blob/main/src/assets/Screenshot%20from%202021-09-14%2006-21-08.png?raw=true)
 2
-![](./src/assets/Screenshot from 2021-09-14 06-22-42.png?raw=true)
+![](https://github.com/gerkibz/leaflet-weather-notification-firebase/blob/main/src/assets/Screenshot%20from%202021-09-14%2006-22-42.png?raw=true)
 And is connected to a firebase realtime database to enable saving and loading
