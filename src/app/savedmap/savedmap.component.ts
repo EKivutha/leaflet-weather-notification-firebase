@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,DoCheck } from '@angular/core';
 import * as L from 'leaflet';
 import { MarkerService } from '../marker.service';
 import { GeoSearchControl, OpenStreetMapProvider, SearchControl } from 'leaflet-geosearch';
@@ -28,10 +28,10 @@ L.Marker.prototype.options.icon = iconDefault;
 export class SavedmapComponent implements OnInit {
   constructor(private markerService: MarkerService,
               private shareservice: ShareService) { }
-  private map;
+  private savedmap;
 
   private initMap(): void{
-    this.map = L.map('map', {
+    this.savedmap = L.map('map', {
       center:[36.8282, -1.3031],
       zoom:3
     });
@@ -42,7 +42,7 @@ export class SavedmapComponent implements OnInit {
       minZoom: 3,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
-    tiles.addTo(this.map);
+    tiles.addTo(this.savedmap);
     //this.markerService.makeCapitalSMarkers(this.map); 
   }
 
@@ -51,8 +51,8 @@ export class SavedmapComponent implements OnInit {
   ngOnInit(): void {
     this.initMap(); 
     this.shareservice.retrieveWeather(); 
-    this.map.on("click", e => {
-      this.markerService.makeCapitalSMarkers(this.map);      
+    this.savedmap.on("click", e => {
+      this.markerService.makeCapitalSMarkers(this.savedmap);      
     }); 
   }    
   
