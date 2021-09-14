@@ -23,7 +23,7 @@ export class ShareService {
         return this.weather.push(weatherd);
       }
     
-      retrieveWeather(): void {
+      retrieveWeather(): Weather[] {
         this.getAll().snapshotChanges().pipe(
           map(changes =>
             changes.map(c =>
@@ -32,8 +32,8 @@ export class ShareService {
           )
         ).subscribe(data => {
           this.weatherS = data;
-          return this.weatherS;
-        });
+          
+        });return this.weatherS;
       }
   
 }

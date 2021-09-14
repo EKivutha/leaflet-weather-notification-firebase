@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as L from 'leaflet';
 import { PopupService } from './popup.service';
@@ -24,8 +24,7 @@ export class MarkerService {
       .then(r => r.json())
       .then(data => { 
           marker.bindPopup(
-          this.popupService.makeCapitalPopup(data,date));  
-          this.shareservice.retrieveWeather();      
+          this.popupService.makeCapitalPopup(data,date));     
           marker.addTo(map);
           const dataObj ={
             //id:null,
@@ -70,17 +69,15 @@ export class MarkerService {
          } 
 
          makeCapitalSMarkers(map: L.Map): void {
-          this.shareservice.retrieveWeather();
-          var data:any =this.shareservice.weatherS;
-          console.log(data);
-          for (const c of data) {   
+          let datas= this.shareservice.retrieveWeather();
+            datas.forEach(c=>  {   
             var lat:any = c.lat;
             var long:any = c.long;
             const marker = L.marker([lat, long]);
             marker.bindPopup(
             this.popupService.makeCapitalPopupF(c));
             marker.addTo(map);
-              }          
+              }  )        
             }
 }
 
